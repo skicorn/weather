@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>skicon weather webapp</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="content">
+        <div class="search">
+           <input type="text" placeholder="Nhập tên tỉnh của mày" spellcheck="false" id="name">
+           <button><img src="image/iconsearch.png"></button>
+        </div>
+        <h1 class="error">abc</h1>
+        <div class="weather">
+            <img src="" class="weather-icon">
+         <div class="descrip">
+            <h1 class="city"></h1>
+            <h1 class="temp"></h1>
+            <h2 class="country"></h2>
+        </div>
+        </div>
+    </div>
+    <script>
+        const api = "https://api.openweathermap.org/data/2.5/weather?q=";
+        const search = document.querySelector(".search input");
+        const pic = document.querySelector(".weather-icon");
+        const tempe = document.querySelector(".temp");
+        const searchBtn = document.querySelector(".search button"); 
+        async function checkWeather(city) {
+           const response = await fetch(api + city + "&appid=a1c5d2d855c9f11bcb7ec42ea47de839");
+           var err = document.querySelector(".error");
+           var data = await response.json();
+           console.log(data);
+           if(data.cod !== 200)
+           {        
+             err.innerHTML = "TỈNH CỦA MÀY KHÔNG CÓ TRÊN BẢN ĐỒ";
+             err.style.display = "block";
+             var weather = document.querySelector(".weather");
+             weather.style.display = "none";
+             return;
+           }
+           else
+           {
+               var temperature = Math.round(data.main.temp-273.15,1);
+               document.querySelector(".city").innerHTML = data.name;
+               tempe.innerHTML=temperature +"°C";
+               document.querySelector(".country").innerHTML = data.sys.country;
+               var weather_main = data.weather[0].main;
+               console.log(weather_main);
+               if(weather_main === "Clouds" && temperature <20){
+                   pic.src = "image/meloncold.png";
+               }
+               else if(weather_main === "Clouds" ){
+                pic.src = "image/meloncloud.png";
+               }
+               else if(weather_main === "Thunderstorm"){
+                pic.src = "image/melonthunder.png";
+               }
+               else if(weather_main === "Drizzle" || weather_main === "Rain"){
+                pic.src = "image/melonrain.png";
+               }
+               else if(weather_main === "Snow"){
+                pic.src = "image/melonsnow.png";
+               }
+               else if(weather_main === "Clear"){
+                pic.src = "image/sunnymelon.png";
+               }
+               var card = document.querySelector(".weather");
+               err.style.display = "none";
+               card.style.display = "block";
+           }
+        }
+        searchBtn.addEventListener("click", ()=>{
+        checkWeather(search.value);
+        }) 
+      </script>
+</body>
+</html>
