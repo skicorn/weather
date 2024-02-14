@@ -1,22 +1,36 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+}
 body {
     background-image: url(image/background.png);
     background-repeat: no-repeat;
     background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
   }
 @font-face {
     font-family: myFONT;
     src: url(font/fontsvn.ttf);
 }
 .content {
-    width: 19em;
+    width: 24em;
+    height: 5em;
     border-radius: 1em;
     background-color: white;
     display: flex;
-    margin: 15em auto 0;
     text-align: center;
+    justify-content: center;
     padding: 3em;
     font-family: myFONT;
     flex-direction: column;
+    transition: 0.4s ease-in-out;
+    position: relative;
+    overflow: hidden;
 }
 .search{
     display: flex;
@@ -52,19 +66,35 @@ input::placeholder {
     width: 3em;
 }
 .weather{
-    margin-top: 3em;
+    margin-top: 4em;
     display: none;
 }
 .weather img{
+    margin-top: 3em;
     height: 7em;
     width: 7em;
 }
 .descrip{
-    display: grid;
+    margin-top: 3em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 }
 .error{
     font-size: 2em;
     margin: 0;
     padding-top: 1em;
     display: none;
+}
+@media only screen and (max-width: 600px) {
+    .city{
+        font-size: 25px;
+    }
+    .descrip > h1{
+        font-size: 25px;
+    }
+    .content{
+        width: 20em;
+    }
 }
