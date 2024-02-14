@@ -11,6 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow-y: hidden;
     height: 100vh;
   }
 @font-face {
@@ -87,7 +88,7 @@ input::placeholder {
     padding-top: 1em;
     display: none;
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 500px) {
     .city{
         font-size: 25px;
     }
@@ -95,6 +96,6 @@ input::placeholder {
         font-size: 25px;
     }
     .content{
-        width: 20em;
+        width: 300px;
     }
 }
